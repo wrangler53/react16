@@ -1,3 +1,11 @@
 .person {
     margin-bottom: 10px;
 }
+
+.redPersons {
+    color: red;
+}
+
+.boldPersons {
+    font-weight: bold;
+}

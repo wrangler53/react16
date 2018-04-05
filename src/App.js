@@ -6,23 +6,23 @@ import Input from './Input';
 import personsList from './personsList';
 import Person from './Person/Person.js'
 
-export default class App extends React.Component {
+class App extends React.Component {
   
   state = {
     inputValue: 0,
     showBlock: false,
     persons: [{
-      id: 1,
+      id: 0,
       name: 'Tom',
       age: 22
     },
     {
-      id: 2,
+      id: 1,
       name: 'Denis',
       age: 33
     },
     {
-      id: 3,
+      id: 2,
       name: 'Angie',
       age: 26
     }]
@@ -47,17 +47,17 @@ export default class App extends React.Component {
   updateName = (value) => {
     this.setState({
       persons: [{
-        id: 1,
+        id: 0,
         name: value,
         age: 22
       },
       {
-        id: 2,
+        id: 1,
         name: 'Denis',
         age: 33
       },
       {
-        id: 3,
+        id: 2,
         name: 'Angie',
         age: 26
       }]
@@ -74,6 +74,12 @@ export default class App extends React.Component {
   }
   
   render() {
+
+    const btnStyle = {
+      backgroundColor: 'green',
+      color: 'black'
+    }
+
     let mainBlock = null;
 
     if(this.state.showBlock) {
@@ -89,32 +95,47 @@ export default class App extends React.Component {
 
         <h1>Play with inputs</h1>
         
-        <Input newValue={(e) => this.updateValue(this.getInputValue(e))}/>
+        <Input newValue={(e) => this.updateValue(this.getInputValue(e))}
+               name={'Enter a new number'} />
       </div>
+
+      btnStyle.backgroundColor = 'red'
+    }
+
+    let classes = [];
+    if(this.state.persons.length <= 2) {
+      classes.push('redPersons')
+    } if(this.state.persons.length <= 1) {
+      classes.push('boldPersons')
     }
 
     return(
       <React.Fragment>
-        <h1>Show/hide block</h1>
-        <button onClick={this.toggleBlock}>Click me to hide/show all above</button>
+          <h1>Show/hide block</h1>
+          
+          <button onClick={this.toggleBlock}
+                  style={btnStyle}>Click me to hide/show all above</button>
 
-        {mainBlock}
+          {mainBlock}
 
-        <h1>Persons block</h1>
-      
-        {
-          this.state.persons.map((el, index) => {
-            return <Person key={el.id} 
-                           name={el.name} 
-                           age={el.age} 
-                           delete={() => this.deleteUser(index)}/>
-          })
-        }
+          <h1 className={classes.join(' ')}>Persons block</h1>
+        
+          {
+            this.state.persons.map((el, index) => {
+              return <Person key={el.id} 
+                            name={el.name} 
+                            age={el.age} 
+                            delete={() => this.deleteUser(index)}/>
+            })
+          }
 
-        <Input newValue={(e) => this.updateName(this.getInputValue(e))} 
-               value={this.state.persons[0].name}/>
+          <Input newValue={(e) => this.updateName(this.getInputValue(e))} 
+                value={this.state.persons[0].name}
+                name={'Enter a new name'}/>
 
       </React.Fragment>
     );
   }
 }
+
+export default App;
