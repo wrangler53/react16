@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
 import Test from './Test';
 import Input from './Input';
+import HelloWorld from './HelloWorld/HelloWorld';
 
-import personsList from './personsList';
-import Person from './Person/Person.js'
+import Person from './Person/Person.js';
+import './Person/person.css';
 
 class App extends React.Component {
   
@@ -82,6 +82,7 @@ class App extends React.Component {
 
     let mainBlock = null;
 
+
     if(this.state.showBlock) {
       mainBlock = 
         <div className="mainBlock">
@@ -111,6 +112,7 @@ class App extends React.Component {
 
     return(
       <React.Fragment>
+          <HelloWorld />
           <h1>Show/hide block</h1>
           
           <button onClick={this.toggleBlock}
@@ -122,10 +124,12 @@ class App extends React.Component {
         
           {
             this.state.persons.map((el, index) => {
-              return <Person key={el.id} 
-                            name={el.name} 
-                            age={el.age} 
-                            delete={() => this.deleteUser(index)}/>
+              return (
+                <Person key={el.id}
+                        name={el.name} 
+                        age={el.age} 
+                        delete={() => this.deleteUser(index)}/>
+              )
             })
           }
 
