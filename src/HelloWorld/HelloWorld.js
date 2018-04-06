@@ -1,12 +1,19 @@
 import React from 'react';
 import classes from './HelloWorld.css';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 const HelloWorld = () => {    
+    // if(Math.random() > 0.7) {
+    //     throw new Error('Smth going wrong');
+    // }
+
     return(
-        <div>
-            <h1 className={classes.blue}>Hi, I'm a React App</h1>
-            <span className={[classes.bold, classes.transformed].join(' ')}>And I'm really working</span>
-        </div>
+        <ErrorBoundary>
+            <div>
+                <h1 className={classes.blue}>Hi, I'm a React App</h1>
+                <span className={[classes.bold, classes.transformed].join(' ')}>And I'm really working</span>
+            </div>
+        </ErrorBoundary>
     );
 }
 
