@@ -8,7 +8,7 @@ const Person = (props) => {
             <div className="person__name">My name is: {props.name}</div>
             <div className="person__age">My age is: {props.age}</div>
 
-            <button onClick={props.delete}>Click here to delete me</button>
+            <button onClick={() => props.onDeleteUser(props.index)}>Click here to delete me</button>
         </div>
     );
 }

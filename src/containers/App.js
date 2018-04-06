@@ -1,10 +1,10 @@
 import React from 'react';
-import Test from './Test';
-import Input from './Input';
-import HelloWorld from './HelloWorld/HelloWorld';
+import Test from '../components/Test/Test';
+import Input from '../components/Input/Input';
+import HelloWorld from '../components/HelloWorld/HelloWorld';
 
-import Person from './Person/Person.js';
-import './Person/person.css';
+import PersonsList from '../components/Persons/PersonsList';
+import '../components/Persons/Person/person.css';
 
 class App extends React.Component {
   
@@ -65,7 +65,7 @@ class App extends React.Component {
   }
 
   deleteUser = (index) => {
-    let newPersonsArr = [...this.state.persons];
+    let newPersonsArr = this.state.persons.slice();
     newPersonsArr.splice(index, 1);
 
     this.setState({
@@ -121,20 +121,11 @@ class App extends React.Component {
           {mainBlock}
 
           <h1 className={classes.join(' ')}>Persons block</h1>
-        
-          {
-            this.state.persons.map((el, index) => {
-              return (
-                <Person key={el.id}
-                        name={el.name} 
-                        age={el.age} 
-                        delete={() => this.deleteUser(index)}/>
-              )
-            })
-          }
+
+          <PersonsList list={this.state.persons} onDeleteUser={this.deleteUser} />
 
           <Input newValue={(e) => this.updateName(this.getInputValue(e))} 
-                value={this.state.persons[0].name}
+                value={this.state.persons[0] && this.state.persons[0].name}
                 name={'Enter a new name'}/>
 
       </React.Fragment>
