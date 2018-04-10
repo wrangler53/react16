@@ -6,11 +6,14 @@ const HelloWorld = () => {
     // if(Math.random() > 0.7) {
     //     throw new Error('Smth going wrong');
     // }
+    this.hello = () => {
+        alert('Hello')
+    }
 
     return(
         <ErrorBoundary>
             <div>
-                <h1 className={classes.blue}>Hi, I'm a React App</h1>
+                <h1 className={classes.blue} onClick={this.hello}>Hi, I'm a React App</h1>
                 <span className={[classes.bold, classes.transformed].join(' ')}>And I'm really working</span>
             </div>
         </ErrorBoundary>

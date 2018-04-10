@@ -1,5 +1,5 @@
 import React from 'react';
-import Test from '../components/Test/Test';
+import TestBtn from '../components/TestBtn/TestBtn';
 import Input from '../components/Input/Input';
 import HelloWorld from '../components/HelloWorld/HelloWorld';
 
@@ -8,24 +8,51 @@ import '../components/Persons/Person/person.css';
 
 class App extends React.Component {
   
-  state = {
-    inputValue: 0,
-    showBlock: false,
-    persons: [{
-      id: 0,
-      name: 'Tom',
-      age: 22
-    },
-    {
-      id: 1,
-      name: 'Denis',
-      age: 33
-    },
-    {
-      id: 2,
-      name: 'Angie',
-      age: 26
-    }]
+  constructor(props) {
+    super(props);
+    console.log('[App.js] inside constructor', props)
+    
+    this.state = {
+      inputValue: 0,
+      showBlock: false,
+      persons: [{
+        id: 0,
+        name: 'Tom',
+        age: 22
+      },
+      {
+        id: 1,
+        name: 'Denis',
+        age: 33
+      },
+      {
+        id: 2,
+        name: 'Angie',
+        age: 26
+      }]
+    }
+  
+  }
+
+  componentWillMount() {
+    console.log('[App.js] inside componentWillMount')    
+  }
+
+  componentDidMount() {
+    console.log('[App.js] inside componentDidMount')    
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState)                        
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+      console.log('[UPDATE App.js] Inside componentWillUpdate', nextProps, nextState)                        
+  }
+
+  componentDidUpdate() {
+      console.log('[UPDATE App.js] Inside componentDidUpdate')                                
   }
 
   getRandom = () => Math.floor(Math.random() * 100);
@@ -74,7 +101,7 @@ class App extends React.Component {
   }
   
   render() {
-
+    console.log('[App.js] Inside render')
     const btnStyle = {
       backgroundColor: 'green',
       color: 'black'
@@ -92,7 +119,7 @@ class App extends React.Component {
         
         <p>Your random value is: <span>{this.state.inputValue}</span></p>
 
-        <Test click={() => this.updateValue(this.getRandom())}/>
+        <TestBtn click={() => this.updateValue(this.getRandom())}/>
 
         <h1>Play with inputs</h1>
         
